@@ -1,0 +1,7 @@
+/* Styles for the biochem search plugin */
+
+.plugin_biochem-search {
+    flex: 1 1 0px;
+    display: flex;
+    flex-direction: column;
+}

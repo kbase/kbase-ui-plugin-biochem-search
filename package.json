@@ -1,0 +1,25 @@
+{
+    "name": "kbase-ui-plugin-biochem-search",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "doc": "doc"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kbase/kbase-ui-plugin-biochem-search.git"
+    },
+    "author": "",
+    "license": "SEE LICENSE IN LICENSE",
+    "bugs": {
+        "url": "https://github.com/kbase/kbase-ui-plugin-biochem-search/issues"
+    },
+    "homepage": "https://github.com/kbase/kbase-ui-plugin-biochem-search#readme",
+    "devDependencies": {
+        "eslint": "5.15.1"
+    }
+}

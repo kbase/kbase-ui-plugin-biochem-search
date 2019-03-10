@@ -1,0 +1,26 @@
+## YAML Template.
+---
+package:
+    author: KBase Developer
+    name: biochem-search
+    description:
+source:
+    styles:
+        - file: styles.css
+install:
+    widgets:
+        - id: biochem-search_panel
+          module: panel
+          type: es6
+    routes:
+        - path: [biochem-search]
+          queryParams:
+              param1: {}
+          widget: biochem-search_panel
+          authorization: true
+    menu:
+        - name: biochem-search
+          definition:
+              path: [biochem-search]
+              label: Biochem Search
+              icon: search
