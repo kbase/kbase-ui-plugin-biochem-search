@@ -139,16 +139,27 @@ define(['preact', 'bluebird', 'kb_lib/jsonRpc/genericClient', './navBar'], (Prea
 
         renderResultsTable() {
             return this.state.searchResults.map((result) => {
+                console.log(result);
                 return h(
                     'div',
-                    { style: { borderBottom: '1px solid silver' } },
-                    h(
-                        'a',
-                        {
-                            href: `/#biochem-search/compound/${result.ref}`
-                        },
-                        result.title
-                    )
+                    { style: {
+                            borderBottom: '1px solid silver',
+                            flex: '1 1 0px',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            overflowY: 'auto'
+                        }},
+                    h('div', {},
+                        h(
+                            'a',
+                            {
+                                href: `/#biochem-search/compound/${result.ref}`
+                            },
+                            result.title
+                        )
+                    ),
+                    h('div', {}, result.data.id),
+                    h('div', {}, result.data.name)
                 );
             });
         }
@@ -243,10 +254,10 @@ define(['preact', 'bluebird', 'kb_lib/jsonRpc/genericClient', './navBar'], (Prea
                     class: 'plugin_biochem-search_search'
                 },
                 this.renderNavBar(),
-                SearchComponent.renderHeader(),
-                this.renderSearchToolbar(),
-                this.renderSearchError(),
-                this.renderSearchResults()
+                h('iframe', {
+                    src: 'https://lucid-raman-efe5c2.netlify.com/',
+                    style: {border: 'none', width: '100%', height: '2500px', overflow: 'visible', scrolling:'no'},
+                })
             );
         }
     }
