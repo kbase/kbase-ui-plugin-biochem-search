@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/kbase-ui-plugin-biochem-search/precache-manifest.f5fadf59f1f21435355b40f713ce0bf2.js"
+  "/kbase-ui-plugin-biochem-search/precache-manifest.a956f44d8ce10eb01872560bd6c0e8d4.js"
 );
 
 workbox.clientsClaim();

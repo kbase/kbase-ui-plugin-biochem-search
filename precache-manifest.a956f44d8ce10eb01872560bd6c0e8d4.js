@@ -1,7 +1,7 @@
 self.__precacheManifest = [
   {
-    "revision": "418dad87601f9c8abd0e5798c0dc1feb",
-    "url": "/kbase-ui-plugin-biochem-search/static/media/fa-solid-900.418dad87.woff2"
+    "revision": "5e2f92123d241cabecf0b289b9b08d4a",
+    "url": "/kbase-ui-plugin-biochem-search/static/media/fa-brands-400.5e2f9212.woff2"
   },
   {
     "revision": "4d5725f255f22489a46b",
@@ -36,8 +36,8 @@ self.__precacheManifest = [
     "url": "/kbase-ui-plugin-biochem-search/static/media/fa-regular-400.65b9977a.ttf"
   },
   {
-    "revision": "5e2f92123d241cabecf0b289b9b08d4a",
-    "url": "/kbase-ui-plugin-biochem-search/static/media/fa-brands-400.5e2f9212.woff2"
+    "revision": "418dad87601f9c8abd0e5798c0dc1feb",
+    "url": "/kbase-ui-plugin-biochem-search/static/media/fa-solid-900.418dad87.woff2"
   },
   {
     "revision": "4d5725f255f22489a46b",
