@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/kbase-ui-plugin-biochem-search/static/media/fa-solid-900.418dad87.woff2"
   },
   {
-    "revision": "422ef19d5948a6f86a8e",
+    "revision": "4d5725f255f22489a46b",
     "url": "/kbase-ui-plugin-biochem-search/static/css/main.7eed8cdb.chunk.css"
   },
   {
@@ -40,8 +40,8 @@ self.__precacheManifest = [
     "url": "/kbase-ui-plugin-biochem-search/static/media/fa-brands-400.5e2f9212.woff2"
   },
   {
-    "revision": "422ef19d5948a6f86a8e",
-    "url": "/kbase-ui-plugin-biochem-search/static/js/main.93cf68ea.chunk.js"
+    "revision": "4d5725f255f22489a46b",
+    "url": "/kbase-ui-plugin-biochem-search/static/js/main.b950e3b3.chunk.js"
   },
   {
     "revision": "2ef8ba3410dcc71578a880e7064acd7a",
@@ -80,7 +80,7 @@ self.__precacheManifest = [
     "url": "/kbase-ui-plugin-biochem-search/static/css/2.238687c9.chunk.css"
   },
   {
-    "revision": "12d4838a3de15d3890ab3cec1e3a8990",
+    "revision": "a1e005189c77b94485b2d69dc8cae0d8",
     "url": "/kbase-ui-plugin-biochem-search/index.html"
   }
 ];
