@@ -255,7 +255,7 @@ define(['preact', 'bluebird', 'kb_lib/jsonRpc/genericClient', './navBar'], (Prea
                 },
                 this.renderNavBar(),
                 h('iframe', {
-                    src: 'https://lucid-raman-efe5c2.netlify.com/',
+                    src: 'https://kbase.github.io/kbase-ui-plugin-biochem-search/',
                     style: {border: 'none', width: '100%', height: '2500px', overflow: 'visible', scrolling:'no'},
                 })
             );

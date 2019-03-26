@@ -12,26 +12,10 @@ install:
     - id: biochem-search_search
       module: searchPanel
       type: es6
-    - id: biochem-search_compound
-      module: compoundPanel
-      type: es6
   routes:
     - path: [biochem-search]
       queryParams: { q: true }
       widget: biochem-search_search
-      authorization: true
-    - path: [biochem-search, { type: param, name: q }]
-      widget: biochem-search_search
-      authorization: true
-    - path:
-        [
-          biochem-search,
-          compound,
-          { type: param, name: workspaceId },
-          { type: param, name: objectId },
-          { type: param, name: version },
-        ]
-      widget: biochem-search_compound
       authorization: true
   menu:
     - name: biochem-search
