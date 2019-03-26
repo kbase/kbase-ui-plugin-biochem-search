@@ -31,6 +31,9 @@ class BiochemistryTable extends Component {
         // This is a bit of a hack but the static compounds file from github has the same content and is MUCH faster to load
         axios.get(this.props.githubURL)
             .then(response => {
+                for (let i=0; i<response.data.length; i++) {
+                    response.data[i]._key = response.data[i].id
+                }
                 this.setState({
                     table_items: response.data,
                     message: `${response.data.length.toLocaleString()} items found`

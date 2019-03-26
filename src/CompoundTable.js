@@ -24,7 +24,7 @@ class CompoundTable extends Component {
                              alt="" onError={i => i.target.src=''} className='compound-detail-image'/>
                     </div>
                     <div className="col-sm-8">
-                        <ul style={{'list-style-type': 'none'}}>
+                        <ul style={{'listStyleType': 'none'}}>
                             <li><strong>Abbreviation:</strong> {row.abbreviation}</li>
                             <li><strong>DeltaG:</strong> {row.deltag}</li>
                             <li><strong>DeltaG Error:</strong> {row.deltagerr}</li>
@@ -49,7 +49,7 @@ class CompoundTable extends Component {
         search_text: '',
         message: 'Loading...',
         columns: [{
-            dataField: 'id',
+            dataField: '_key',
             text: 'ID',
             sort: true,
         }, {

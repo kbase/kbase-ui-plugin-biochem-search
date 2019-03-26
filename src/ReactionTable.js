@@ -8,9 +8,9 @@ class ReactionTable extends Component {
     };
 
     renderCompound = (comp_txt) => {
-        const [_, stoic, cid] = /(\([0-9.]+\)) (\w+)/.exec(comp_txt);
+        const [, stoic, cid] = /(\([0-9.]+\)) (\w+)/.exec(comp_txt);
         return (
-            <React.Fragment>
+            <React.Fragment key={comp_txt}>
                 <div className={'col-md-auto p-0'}>
                     {stoic}
                 </div>
@@ -26,7 +26,7 @@ class ReactionTable extends Component {
     renderHalfRxn(compounds){
         return compounds.split("+")
             .map(i => {return this.renderCompound(i)})
-            .reduce((prev, curr) => [prev, <h4 className='col-md-auto'> + </h4>, curr])
+            .reduce((prev, curr) => [prev, <h4 key={curr} className='col-md-auto'> + </h4>, curr])
     };
 
     reactionImage = (row) => {
@@ -58,7 +58,7 @@ class ReactionTable extends Component {
                         {this.reactionImage(row)}
                     </div>
                     <div className="col-sm">
-                        <ul style={{'list-style-type': 'none'}}>
+                        <ul style={{'listStyleType': 'none'}}>
                             <li><strong>Abbreviation:</strong> {row.abbreviation}</li>
                             <li><strong>Reaction definition:</strong> {row.definition}</li>
                             <li><strong>DeltaG:</strong> {row.deltag}</li>
