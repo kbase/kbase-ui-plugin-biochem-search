@@ -63,6 +63,7 @@ define(['preact', 'kb_lib/html', './components/compound'], function (Preact, htm
             );
         }
 
+        // eslint-disable-next-line class-methods-use-this
         stop() {
             return null;
         }

@@ -99,6 +99,7 @@ define(['preact', 'kb_lib/html', './components/search'], function (Preact, html,
         If any resources were created in the constructor, attach, or start,
         we can clean them up here. Examples include subwidgets, timers.
         */
+        // eslint-disable-next-line class-methods-use-this
         stop() {
             return null;
         }
