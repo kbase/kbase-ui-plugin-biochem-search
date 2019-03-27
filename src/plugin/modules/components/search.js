@@ -139,17 +139,20 @@ define(['preact', 'bluebird', 'kb_lib/jsonRpc/genericClient', './navBar'], (Prea
 
         renderResultsTable() {
             return this.state.searchResults.map((result) => {
-                console.log(result);
                 return h(
                     'div',
-                    { style: {
+                    {
+                        style: {
                             borderBottom: '1px solid silver',
                             flex: '1 1 0px',
                             display: 'flex',
                             flexDirection: 'row',
                             overflowY: 'auto'
-                        }},
-                    h('div', {},
+                        }
+                    },
+                    h(
+                        'div',
+                        {},
                         h(
                             'a',
                             {
@@ -247,17 +250,22 @@ define(['preact', 'bluebird', 'kb_lib/jsonRpc/genericClient', './navBar'], (Prea
             this.doSearch(this.props.query);
         }
 
+        // eslint-disable-next-line class-methods-use-this
+        renderIFrame() {
+            return h('iframe', {
+                src: 'https://kbase.github.io/kbase-ui-plugin-biochem-search/',
+                style: { border: 'none', width: '100%', height: '2500px', overflow: 'visible', scrolling: 'no' }
+            });
+        }
+
         render() {
             return h(
                 'div',
                 {
                     class: 'plugin_biochem-search_search'
                 },
-                this.renderNavBar(),
-                h('iframe', {
-                    src: 'https://kbase.github.io/kbase-ui-plugin-biochem-search/',
-                    style: {border: 'none', width: '100%', height: '2500px', overflow: 'visible', scrolling:'no'},
-                })
+                // this.renderNavBar(),
+                this.renderIFrame()
             );
         }
     }
