@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import BiochemistryTable from "./BiochemistryTable";
+import {compound_image_src, github_url, relation_engine_url} from "./common";
 
 
 class ReactionTable extends Component {
@@ -15,7 +16,7 @@ class ReactionTable extends Component {
                     {stoic}
                 </div>
                 <div className={'col-md-auto'}>
-                    <img src={`http://minedatabase.mcs.anl.gov/compound_images/ModelSEED/${cid}.png`}
+                    <img src={compound_image_src(cid)}
                          alt="" style={{height: '110px'}} onError={i => i.target.src=''}/>
                 </div>
             </React.Fragment>
@@ -110,8 +111,8 @@ class ReactionTable extends Component {
             <BiochemistryTable
                 columns={this.state.columns}
                 expandRow={this.expandRow}
-                githubURL={'https://raw.githubusercontent.com/ModelSEED/ModelSEEDDatabase/dev/Biochemistry/reactions.json'}
-                relationEngineURL={'https://ci.kbase.us/services/relation_engine_api/api/query_results/?view=search_reactions&batch_size=9999999'}
+                githubURL={`${github_url}/reactions.json`}
+                relationEngineURL={`${relation_engine_url}/?view=search_reactions&batch_size=9999999`}
             />
         );
     }
