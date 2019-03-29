@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import BiochemistryTable from "./BiochemistryTable";
+import {compound_image_src, github_url, relation_engine_url} from "./common";
 
 class CompoundTable extends Component {
     imgFormatter = (cell, row) => {
         return (
-            <img src={`http://minedatabase.mcs.anl.gov/compound_images/ModelSEED/${cell}.png`}
+            <img src={compound_image_src(cell)}
                 alt="" style={{height: '100px'}} onError={i => i.target.src=''}/>
         );
     };
@@ -20,7 +21,7 @@ class CompoundTable extends Component {
             return (
                 <div className="row">
                     <div className="col-sm-4">
-                        <img src={`http://minedatabase.mcs.anl.gov/compound_images/ModelSEED/${row.id}.png`}
+                        <img src={compound_image_src(row.id)}
                              alt="" onError={i => i.target.src=''} className='compound-detail-image'/>
                     </div>
                     <div className="col-sm-8">
@@ -84,8 +85,8 @@ class CompoundTable extends Component {
             <BiochemistryTable
                 columns={this.state.columns}
                 expandRow={this.expandRow}
-                githubURL={'https://raw.githubusercontent.com/ModelSEED/ModelSEEDDatabase/dev/Biochemistry/compounds.json'}
-                relationEngineURL={'https://ci.kbase.us/services/relation_engine_api/api/query_results/?view=search_compounds&batch_size=9999999'}
+                githubURL={`${github_url}/compounds.json`}
+                relationEngineURL={`${relation_engine_url}/?view=search_compounds&batch_size=9999999`}
             />
         );
     }
