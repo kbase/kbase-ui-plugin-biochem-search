@@ -1,47 +1,23 @@
 {
-  "name": "kbase-ui-plugin-biochem-search",
-  "version": "0.0.4",
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.8.1",
-    "axios": "^0.18.0",
-    "bootstrap": "^4.0.0",
-    "gh-pages": "^2.0.1",
-    "react": "^16.8.4",
-    "react-bootstrap-table-next": "^3.0.2",
-    "react-bootstrap-table2-paginator": "^2.0.4",
-    "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
-  },
-  "directories": {
-    "doc": "doc"
-  },
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build && rsync -a build src/plugin/iframe_root",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kbase/kbase-ui-plugin-biochem-search.git"
-  },
-  "author": "",
-  "license": "SEE LICENSE IN LICENSE",
-  "bugs": {
-    "url": "https://github.com/kbase/kbase-ui-plugin-biochem-search/issues"
-  },
-  "homepage": "https://kbase.github.io/kbase-ui-plugin-biochem-search",
-  "devDependencies": {
-    "bower": "1.8.8"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+    "name": "kbase-ui-plugin-biochem-search",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "directories": {
+        "doc": "docs"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/kbase/kbase-ui-plugin-biochem-search.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/eapearson/kbase-ui-plugin-biochem-search/issues"
+    },
+    "homepage": "https://github.com/eapearson/kbase-ui-plugin-biochem-search#readme",
+    "devDependencies": {}
 }

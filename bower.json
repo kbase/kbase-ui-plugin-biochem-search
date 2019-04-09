@@ -1,14 +1,8 @@
 {
-    "name": "kbase-ui-plugin-simple-sample",
-    "description": "A plugin which can serve as an example or a starting point for a new plugin",
-    "author": [
-        "kbase"
-    ],
-    "keywords": [
-        "kbase",
-        "ui",
-        "plugin"
-    ],
+    "name": "kbase-ui-plugin-biochem-search",
+    "description": "Biochemistry Search App",
+    "author": ["kbase"],
+    "keywords": ["kbase", "ui", "plugin"],
     "moduleType": "kbase-ui-plugin",
     "main": "src/plugin/config.yml",
     "repository": {
@@ -20,10 +14,7 @@
         "bootstrap": "^3.3.0",
         "kbase-common-js": "^2.5.0"
     },
-    "devDependencies": {
-    },
-    "ignore": [
-        ".gitignore"
-    ],
+    "devDependencies": {},
+    "ignore": [".gitignore"],
     "license": "SEE LICENSE IN LICENSE"
 }
