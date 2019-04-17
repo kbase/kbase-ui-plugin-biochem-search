@@ -8,7 +8,7 @@ import ReactionTable from './ReactionTable';
 class App extends Component {
     render() {
         return (
-            <div className="container m-3 p-0">
+            <div className="container m-3 p-0" data-k-b-testhook-plugin="biochem-search">
                 <Tabs>
                     <div label="Compounds">
                         <CompoundTable />
