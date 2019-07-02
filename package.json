@@ -11,10 +11,10 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@github.com/kbase/kbase-ui-plugin-biochem-search.git"
+        "url": "https://github.com/kbase/kbase-ui-plugin-biochem-search"
     },
-    "author": "",
-    "license": "ISC",
+    "author": "KBase Developers",
+    "license": "SEE LICENSE IN LICENSE.md",
     "bugs": {
         "url": "https://github.com/eapearson/kbase-ui-plugin-biochem-search/issues"
     },
