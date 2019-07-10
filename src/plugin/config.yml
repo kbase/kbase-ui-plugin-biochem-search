@@ -9,13 +9,13 @@ source:
     - file: styles.css
 install:
   widgets:
-    - id: biochem-search_search
-      module: searchPanel
+    - id: kb_plugin_biochem-search_search
+      module: panel
       type: es6
   routes:
     - path: [biochem-search]
       queryParams: { q: true }
-      widget: biochem-search_search
+      widget: kb_plugin_biochem-search_search 
       authorization: true
   menu:
     - name: biochem-search
