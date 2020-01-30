@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Tab extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     onClick() {
         const { label, onClick } = this.props;
         onClick(label);

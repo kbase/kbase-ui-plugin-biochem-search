@@ -1,77 +1,17 @@
 import React, { Component } from 'react';
 import BiochemistryTable from './BiochemistryTable';
-import { compound_image_src, github_url, relation_engine_url } from './common';
+import {
+    compound_image_src, github_url, relation_engine_url
+} from './common';
 
 class ReactionTable extends Component {
-    static aliasFormatter(cell) {
-        return (
-            <span>
-                {String(cell)
-                    .replace(/\|/g, ', ')
-                    .replace(/;/g, '\n')}
-            </span>
-        );
-    }
-
-    static renderCompound(comp_txt) {
-        const [, stoic, cid] = /(\([0-9.]+\)) (\w+)/.exec(comp_txt);
-        return (
-            <React.Fragment key={comp_txt}>
-                <div className={'col-md-auto p-0'}>{stoic}</div>
-                <div className={'col-md-auto'}>
-                    <img
-                        src={compound_image_src(cid)}
-                        alt=""
-                        style={{ height: '110px' }}
-                        onError={(i) => (i.target.src = '')}
-                    />
-                </div>
-            </React.Fragment>
-        );
-    }
-
-    static renderHalfRxn(compounds) {
-        return compounds
-            .split('+')
-            .map((i) => {
-                return this.constructor.renderCompound(i);
-            })
-            .reduce((prev, curr) => [
-                prev,
-                <h4 key={curr} className="col-md-auto">
-                    {' '}
-                    +{' '}
-                </h4>,
-                curr
-            ]);
-    }
-
-    static reactionImage(row) {
-        const [reactants, products] = row.code.split(' <=> ');
-        let sign = '↔';
-        if (row.direction === '>') {
-            sign = '→';
-        } else if (row.direction === '<') {
-            sign = '←';
-        }
-        return (
-            <div className="container">
-                <div className="row align-items-center">
-                    {this.constructor.renderHalfRxn(reactants)}
-                    <h4 className="col-md-auto">{sign}</h4>
-                </div>
-                <div className="row align-items-center">{this.constructor.renderHalfRxn(products)}</div>
-            </div>
-        );
-    }
-
     constructor(props) {
         super(props);
         this.expandRow = {
             renderer: (row) => {
                 return (
                     <div className="row">
-                        <div className="col-sm">{this.constructor.reactionImage(row)}</div>
+                        <div className="col-sm">{this.reactionImage(row)}</div>
                         <div className="col-sm">
                             <ul style={{ listStyleType: 'none' }}>
                                 <li>
@@ -142,10 +82,72 @@ class ReactionTable extends Component {
                 {
                     dataField: 'aliases',
                     text: 'Aliases',
-                    formatter: this.constructor.aliasFormatter
+                    formatter: this.aliasFormatter
                 }
             ]
         };
+    }
+
+    static aliasFormatter(cell) {
+        return (
+            <span>
+                {String(cell)
+                    .replace(/\|/g, ', ')
+                    .replace(/;/g, '\n')}
+            </span>
+        );
+    }
+
+    static renderCompound(comp_txt) {
+        const [, stoic, cid] = /(\([0-9.]+\)) (\w+)/.exec(comp_txt);
+        return (
+            <React.Fragment key={comp_txt}>
+                <div className={'col-md-auto p-0'}>{stoic}</div>
+                <div className={'col-md-auto'}>
+                    <img
+                        src={compound_image_src(cid)}
+                        alt=""
+                        style={{ height: '110px' }}
+                        onError={(i) => (i.target.src = '')}
+                    />
+                </div>
+            </React.Fragment>
+        );
+    }
+
+    static renderHalfRxn(compounds) {
+        return compounds
+            .split('+')
+            .map((i) => {
+                return this.renderCompound(i);
+            })
+            .reduce((prev, curr) => [
+                prev,
+                <h4 key={curr} className="col-md-auto">
+                    {' '}
+                    +{' '}
+                </h4>,
+                curr
+            ]);
+    }
+
+    static reactionImage(row) {
+        const [reactants, products] = row.code.split(' <=> ');
+        let sign = '↔';
+        if (row.direction === '>') {
+            sign = '→';
+        } else if (row.direction === '<') {
+            sign = '←';
+        }
+        return (
+            <div className="container">
+                <div className="row align-items-center">
+                    {this.renderHalfRxn(reactants)}
+                    <h4 className="col-md-auto">{sign}</h4>
+                </div>
+                <div className="row align-items-center">{this.renderHalfRxn(products)}</div>
+            </div>
+        );
     }
 
     render() {
@@ -154,7 +156,8 @@ class ReactionTable extends Component {
                 columns={this.state.columns}
                 expandRow={this.expandRow}
                 githubURL={`${github_url}/reactions.json`}
-                relationEngineURL={`${relation_engine_url}/?view=search_reactions&batch_size=9999999`}
+                relationEngineURL={`${relation_engine_url}/?stored_query=search_reactions`}
+                title="Reactions"
             />
         );
     }

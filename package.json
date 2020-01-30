@@ -1,13 +1,14 @@
 {
     "name": "kbase-ui-plugin-biochem-search",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "",
     "main": "index.js",
     "directories": {
         "doc": "docs"
     },
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build-plugin": "bash scripts/build-plugin.bash",
+        "install-plugin": "node scripts/install-plugin.js"
     },
     "repository": {
         "type": "git",
@@ -19,5 +20,9 @@
         "url": "https://github.com/eapearson/kbase-ui-plugin-biochem-search/issues"
     },
     "homepage": "https://github.com/eapearson/kbase-ui-plugin-biochem-search#readme",
-    "devDependencies": {}
+    "devDependencies": {
+        "bluebird": "3.7.2",
+        "tar": "5.0.5",
+        "fs-extra": "8.1.0"
+    }
 }

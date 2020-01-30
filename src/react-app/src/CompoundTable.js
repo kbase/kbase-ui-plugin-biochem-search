@@ -86,7 +86,7 @@ class CompoundTable extends Component {
         this.state = {
             table_items: [],
             search_text: '',
-            message: 'Loading...',
+            message: '',
             columns: [
                 {
                     dataField: '_key',
@@ -134,6 +134,7 @@ class CompoundTable extends Component {
                 expandRow={this.expandRow}
                 githubURL={`${github_url}/compounds.json`}
                 relationEngineURL={`${relation_engine_url}/?view=search_compounds&batch_size=9999999`}
+                title="Compounds"
             />
         );
     }

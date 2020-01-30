@@ -8,7 +8,7 @@ export default class Tabs extends Component {
         super(props);
 
         this.state = {
-            activeTab: null
+            activeTab: 'Compounds'
         };
     }
 
