@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
-import axios from 'axios';
 
 const ENTER_KEY = 13;
 
@@ -62,13 +61,44 @@ class BiochemistryTable extends Component {
                 searchState: SEARCH_STATE_NONE
             });
         } else {
-            axios
-                .post(this.props.relationEngineURL, {
+            const url = new URL(this.props.relationEngineURL);
+            if (this.props.view) {
+                url.searchParams.append('view', this.props.view);
+            }
+            if (this.props.storedQuery) {
+                url.searchParams.append('stored_query', this.props.storedQuery);
+            }
+            if (this.props.batchSize) {
+                url.searchParams.append('batch_size', this.props.batchSize);
+            }
+
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify({
                     search_text: this.state.search_text,
                     all_documents: false,
                     offset: 0,
-                    result_limit: 9999999,
+                    result_limit: 1000,
                     include_obsolete: true
+                })
+            })
+                .then((response) => {
+                    if (response.status !== 200) {
+                        return response.json()
+                            .then((errorResponse) => {
+                                if (errorResponse.arango_message) {
+                                    throw new Error(errorResponse.arango_message);
+                                } else if (errorResponse.message) {
+                                    throw new Error(errorResponse.message);
+                                } else if (errorResponse.error) {
+                                    throw new Error(errorResponse.error);
+                                } else {
+                                    console.error(errorResponse);
+                                    throw new Error('Unknown error - unknown json response - check browser console');
+                                }
+                            });
+                    }
+                    return response.json();
                 })
                 .then((response) => {
                     this.setState({
@@ -78,6 +108,7 @@ class BiochemistryTable extends Component {
                     });
                 })
                 .catch((err) => {
+                    console.error('ERROR', err);
                     this.setState({
                         searchState: SEARCH_STATE_ERROR,
                         error: err.message,
@@ -92,26 +123,34 @@ class BiochemistryTable extends Component {
     }
 
     renderNoData() {
-        switch (this.state.searchState) {
-            case SEARCH_STATE_NONE:
-                return <div className="well">
-                    Please search for {this.props.title} above
-                </div>;
-            case SEARCH_STATE_SEARCHING:
-                // Don't need to handle the "data" case, since this is only rendered
-                // if there is no data.
-                return <div className="well">
-                    Searching... <span class="fa fa-spinner fa-spin" />
-                </div>;
-            case SEARCH_STATE_SUCCESS:
-                return <div className="well">
-                    NO DATA FOUND by the search <i>{this.state.search_text}</i>
-                </div>;
-            case SEARCH_STATE_ERROR:
-                return <div className="well">
-                    Error fetching {this.props.title}: <span class="text-danger">{this.state.error}</span>
-                </div>;
-        }
+        const content = () => {
+            switch (this.state.searchState) {
+                case SEARCH_STATE_NONE:
+                    return <span>
+                        Please search for {this.props.title} above
+                        </span>
+                case SEARCH_STATE_SEARCHING:
+                    // Don't need to handle the "data" case, since this is only rendered
+                    // if there is no data.
+                    return <span>
+                        Searching... <span className="fa fa-spinner fa-spin" />
+                    </span>;
+                case SEARCH_STATE_SUCCESS:
+                    return <span>
+                        NO DATA FOUND by the search <i>{this.state.search_text}</i>
+                    </span>;
+                case SEARCH_STATE_ERROR:
+                    return <span>
+                        Error fetching {this.props.title}: <span className="text-danger">{this.state.error}</span>
+                    </span>;
+                default:
+                    return <span>
+                        <span className="text-danger">Invalid state {this.state.searchState}</span>
+                    </span>;
+            }
+        };
+        return <div className="well">{content()}</div>;
+
     }
 
     handleTableChange() {
@@ -123,11 +162,15 @@ class BiochemistryTable extends Component {
             case SEARCH_STATE_NONE:
                 return 'Please enter one or more search terms';
             case SEARCH_STATE_SEARCHING:
-                return 'Searching... <span class="fa fa-spinner fa-spin"';
+                return <span>
+                    Searching... <span className="fa fa-spinner fa-spin" />
+                </span>;
             case SEARCH_STATE_SUCCESS:
                 return `${this.state.searchData.length.toLocaleString()} items found`;
             case SEARCH_STATE_ERROR:
-                return <span class="text-danger">Error: {this.state.error}</span>
+                return <span className="text-danger">Error: {this.state.error}</span>;
+            default:
+                return <span className="text-danger">Invalid state {this.state.searchState}</span>;
         }
         // ${response.data.results.length.toLocaleString()} items found`
     }
@@ -174,8 +217,10 @@ BiochemistryTable.propTypes = {
     expandRow: PropTypes.object,
     columns: PropTypes.array,
     relationEngineURL: PropTypes.string.isRequired,
-    githubURL: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+    // githubURL: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    view: PropTypes.string,
+    storedQuery: PropTypes.string
 };
 
 export default BiochemistryTable;

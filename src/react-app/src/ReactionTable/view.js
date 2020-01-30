@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import BiochemistryTable from './BiochemistryTable';
+import BiochemistryTable from '../BiochemistryTable';
 import {
-    compound_image_src, github_url, relation_engine_url
-} from './common';
+    compound_image_src
+} from '../common';
 
 class ReactionTable extends Component {
     constructor(props) {
@@ -155,9 +155,10 @@ class ReactionTable extends Component {
             <BiochemistryTable
                 columns={this.state.columns}
                 expandRow={this.expandRow}
-                githubURL={`${github_url}/reactions.json`}
-                relationEngineURL={`${relation_engine_url}/?stored_query=search_reactions`}
+                // githubURL={`${github_url}/reactions.json`}
+                relationEngineURL={this.props.relationEngineURL}
                 title="Reactions"
+                storedQuery="search_reactions"
             />
         );
     }

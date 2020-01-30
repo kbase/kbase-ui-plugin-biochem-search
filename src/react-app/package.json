@@ -5,12 +5,11 @@
     "main": "index.js",
     "dependencies": {
         "@fortawesome/fontawesome-free": "5.12.0",
-        "axios": "0.19.1",
         "bootstrap": "4.4.1",
         "classnames": "2.2.6",
         "gh-pages": "2.2.0",
         "jquery": "3.4.1",
-        "popper.js": "1.16.0",
+        "popper.js": "1.16.1",
         "prop-types": "15.7.2",
         "react": "16.12.0",
         "react-bootstrap-table-next": "3.3.3",
@@ -19,7 +18,9 @@
         "react-scripts": "3.3.0",
         "typescript": "3.7.5",
         "@kbase/ui-lib": "0.2.1-alpha.3",
-        "@kbase/ui-components": "0.2.1-alpha.13"
+        "@kbase/ui-components": "0.2.1-alpha.14",
+        "redux": "4.0.5",
+        "react-redux": "7.1.3"
     },
     "directories": {
         "doc": "doc"
@@ -48,5 +49,6 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ]
+    ],
+    "proxy": "https://ci.kbase.us"
 }

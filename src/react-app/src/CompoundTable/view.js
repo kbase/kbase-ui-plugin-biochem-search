@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import BiochemistryTable from './BiochemistryTable';
-import { compound_image_src, github_url, relation_engine_url } from './common';
+import BiochemistryTable from '../BiochemistryTable';
+import { compound_image_src } from '../common';
 
 class CompoundTable extends Component {
     static imgFormatter(cell) {
@@ -128,12 +128,15 @@ class CompoundTable extends Component {
     }
 
     render() {
+        console.log('props', this.props);
         return (
             <BiochemistryTable
                 columns={this.state.columns}
                 expandRow={this.expandRow}
-                githubURL={`${github_url}/compounds.json`}
-                relationEngineURL={`${relation_engine_url}/?view=search_compounds&batch_size=9999999`}
+                // githubURL={`${github_url}/compounds.json`}
+                // relationEngineURL={`${relation_engine_url}/?view=search_compounds&batch_size=9999999`}
+                relationEngineURL={this.props.relationEngineURL}
+                view="search_compounds"
                 title="Compounds"
             />
         );
