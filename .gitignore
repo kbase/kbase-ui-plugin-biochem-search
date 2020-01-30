@@ -3,4 +3,4 @@ bower_components
 .DS_Store
 /dist/
 _attic
-/src/react-app/build/
+build/
