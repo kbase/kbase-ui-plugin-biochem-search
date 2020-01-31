@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import BiochemistryTable from '../BiochemistryTable';
-import { compound_image_src } from '../common';
+import { compoundImagePath } from '../common';
 
 class CompoundTable extends Component {
     static imgFormatter(cell) {
         return (
             <img
-                src={compound_image_src(cell)}
+                src={compoundImagePath(cell)}
                 alt=""
                 style={{ height: '100px' }}
                 onError={(i) => (i.target.src = '')}
@@ -26,13 +26,52 @@ class CompoundTable extends Component {
 
     constructor(props) {
         super(props);
+
+        this.columns = [
+            {
+                dataField: '_key',
+                text: 'ID',
+                sort: true
+            },
+            {
+                dataField: 'id',
+                text: 'Image',
+                formatter: CompoundTable.imgFormatter
+            },
+            {
+                dataField: 'name',
+                text: 'Name',
+                sort: true
+            },
+            {
+                dataField: 'formula',
+                text: 'Formula',
+                sort: true
+            },
+            {
+                dataField: 'mass',
+                text: 'Mass',
+                sort: true
+            },
+            {
+                dataField: 'charge',
+                text: 'Charge',
+                sort: true
+            },
+            {
+                dataField: 'aliases',
+                text: 'Aliases',
+                formatter: CompoundTable.aliasFormatter
+            }
+        ];
+
         this.expandRow = {
             renderer: (row) => {
                 return (
                     <div className="row">
                         <div className="col-sm-4">
                             <img
-                                src={compound_image_src(row.id)}
+                                src={compoundImagePath(row.id)}
                                 alt=""
                                 onError={(i) => (i.target.src = '')}
                                 className="compound-detail-image"
@@ -86,56 +125,17 @@ class CompoundTable extends Component {
         this.state = {
             table_items: [],
             search_text: '',
-            message: '',
-            columns: [
-                {
-                    dataField: '_key',
-                    text: 'ID',
-                    sort: true
-                },
-                {
-                    dataField: 'id',
-                    text: 'Image',
-                    formatter: CompoundTable.imgFormatter
-                },
-                {
-                    dataField: 'name',
-                    text: 'Name',
-                    sort: true
-                },
-                {
-                    dataField: 'formula',
-                    text: 'Formula',
-                    sort: true
-                },
-                {
-                    dataField: 'mass',
-                    text: 'Mass',
-                    sort: true
-                },
-                {
-                    dataField: 'charge',
-                    text: 'Charge',
-                    sort: true
-                },
-                {
-                    dataField: 'aliases',
-                    text: 'Aliases',
-                    formatter: CompoundTable.aliasFormatter
-                }
-            ]
-        };
+            message: ''
+        }
     }
 
     render() {
-        console.log('props', this.props);
+        const url = this.props.relationEngineURL + '/api/v1/query_results/';
         return (
             <BiochemistryTable
-                columns={this.state.columns}
+                columns={this.columns}
                 expandRow={this.expandRow}
-                // githubURL={`${github_url}/compounds.json`}
-                // relationEngineURL={`${relation_engine_url}/?view=search_compounds&batch_size=9999999`}
-                relationEngineURL={this.props.relationEngineURL}
+                relationEngineURL={url}
                 view="search_compounds"
                 title="Compounds"
             />

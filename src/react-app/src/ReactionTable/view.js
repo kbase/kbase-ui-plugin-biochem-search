@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import BiochemistryTable from '../BiochemistryTable';
 import {
-    compound_image_src
+    compoundImagePath
 } from '../common';
 
 class ReactionTable extends Component {
@@ -51,44 +51,45 @@ class ReactionTable extends Component {
             expanded: []
         };
 
+        this.columns = [
+            {
+                dataField: 'id',
+                text: 'ID',
+                sort: true
+            },
+            {
+                dataField: 'name',
+                text: 'Name',
+                sort: true
+            },
+            {
+                dataField: 'equation',
+                text: 'Equation'
+            },
+            {
+                dataField: 'deltag',
+                text: 'deltaG',
+                sort: true
+            },
+            {
+                dataField: 'status',
+                text: 'Status',
+                sort: true
+            },
+            {
+                dataField: 'aliases',
+                text: 'Aliases',
+                formatter: this.aliasFormatter.bind(this)
+            }
+        ];
+
         this.state = {
             table_items: [],
-            search_text: '',
-            columns: [
-                {
-                    dataField: 'id',
-                    text: 'ID',
-                    sort: true
-                },
-                {
-                    dataField: 'name',
-                    text: 'Name',
-                    sort: true
-                },
-                {
-                    dataField: 'equation',
-                    text: 'Equation'
-                },
-                {
-                    dataField: 'deltag',
-                    text: 'deltaG',
-                    sort: true
-                },
-                {
-                    dataField: 'status',
-                    text: 'Status',
-                    sort: true
-                },
-                {
-                    dataField: 'aliases',
-                    text: 'Aliases',
-                    formatter: this.aliasFormatter
-                }
-            ]
+            search_text: ''
         };
     }
 
-    static aliasFormatter(cell) {
+    aliasFormatter(cell) {
         return (
             <span>
                 {String(cell)
@@ -98,14 +99,14 @@ class ReactionTable extends Component {
         );
     }
 
-    static renderCompound(comp_txt) {
+    renderCompound(comp_txt) {
         const [, stoic, cid] = /(\([0-9.]+\)) (\w+)/.exec(comp_txt);
         return (
             <React.Fragment key={comp_txt}>
                 <div className={'col-md-auto p-0'}>{stoic}</div>
                 <div className={'col-md-auto'}>
                     <img
-                        src={compound_image_src(cid)}
+                        src={compoundImagePath(cid)}
                         alt=""
                         style={{ height: '110px' }}
                         onError={(i) => (i.target.src = '')}
@@ -115,7 +116,7 @@ class ReactionTable extends Component {
         );
     }
 
-    static renderHalfRxn(compounds) {
+    renderHalfRxn(compounds) {
         return compounds
             .split('+')
             .map((i) => {
@@ -131,7 +132,7 @@ class ReactionTable extends Component {
             ]);
     }
 
-    static reactionImage(row) {
+    reactionImage(row) {
         const [reactants, products] = row.code.split(' <=> ');
         let sign = '↔';
         if (row.direction === '>') {
@@ -151,12 +152,12 @@ class ReactionTable extends Component {
     }
 
     render() {
+        const url = this.props.relationEngineURL + '/api/v1/query_results/';
         return (
             <BiochemistryTable
-                columns={this.state.columns}
+                columns={this.columns}
                 expandRow={this.expandRow}
-                // githubURL={`${github_url}/reactions.json`}
-                relationEngineURL={this.props.relationEngineURL}
+                relationEngineURL={url}
                 title="Reactions"
                 storedQuery="search_reactions"
             />

@@ -11,8 +11,6 @@ import { AppBase, AuthGate } from '@kbase/ui-components';
 
 const store = createReduxStore();
 
-console.log('store', store.getState());
-
 class App extends Component {
     render() {
         return (

@@ -68,9 +68,11 @@ class BiochemistryTable extends Component {
             if (this.props.storedQuery) {
                 url.searchParams.append('stored_query', this.props.storedQuery);
             }
-            if (this.props.batchSize) {
-                url.searchParams.append('batch_size', this.props.batchSize);
-            }
+            // if (this.props.batchSize) {
+            //     url.searchParams.append('batch_size', this.props.batchSize);
+            // }
+            url.searchParams.append('batch_size', 1000);
+            url.searchParams.append('full_count', 'true');
 
             fetch(url, {
                 method: 'POST',
@@ -101,10 +103,26 @@ class BiochemistryTable extends Component {
                     return response.json();
                 })
                 .then((response) => {
+                    const data = response.results.map((datum) => {
+                        if (!datum.id) {
+                            datum.id = datum._id;
+                        }
+                        return datum;
+                    });
+
+                    const hasMore = data.length < response.stats.scannedIndex;
+                    let message = `${data.length.toLocaleString()} items found`;
+                    if (hasMore) {
+                        message += '- more!'
+                    }
+                    // console.log('response', message, hasMore, response, data.length, response.stats.scannedIndex);
                     this.setState({
-                        tableData: response.data.results,
-                        message: `${response.data.results.length.toLocaleString()} items found`,
-                        searchState: SEARCH_STATE_SUCCESS
+                        tableData: data,
+                        // totalCount: response.total,
+                        totalCount: response.stats.scannedIndex,
+                        message,
+                        searchState: SEARCH_STATE_SUCCESS,
+                        hasMore
                     });
                 })
                 .catch((err) => {
@@ -154,7 +172,7 @@ class BiochemistryTable extends Component {
     }
 
     handleTableChange() {
-        console.log('table changed...');
+        // console.log('table changed...');
     }
 
     renderMessage() {
@@ -166,7 +184,18 @@ class BiochemistryTable extends Component {
                     Searching... <span className="fa fa-spinner fa-spin" />
                 </span>;
             case SEARCH_STATE_SUCCESS:
-                return `${this.state.searchData.length.toLocaleString()} items found`;
+                // return `${this.state.tableData.length.toLocaleString()} items found`;
+
+                if (this.state.tableData.length === 0) {
+                    return 'Nothing found with this query'
+                }
+
+                let message = `${this.state.tableData.length.toLocaleString()} items found`;
+                if (this.state.hasMore) {
+                    let more = this.state.totalCount - this.state.tableData.length;
+                    message += ` - ${more.toLocaleString()} more not shown`;
+                }
+                return message;
             case SEARCH_STATE_ERROR:
                 return <span className="text-danger">Error: {this.state.error}</span>;
             default:
@@ -175,7 +204,24 @@ class BiochemistryTable extends Component {
         // ${response.data.results.length.toLocaleString()} items found`
     }
 
+    handlePageChange(page, sizePerPage) {
+        // console.log('pageChange', page, sizePerPage);
+
+    }
+
+    handleSizePerPageChange(page, sizePerPage) {
+        // console.log('size per page change', page, sizePerPage);
+    }
+
     render() {
+        // const x = 1 / 0;
+        // if (!Number.isFinite(x)) {
+        //     throw Error('that was fun');
+        // }
+        const pagination = paginationFactory({
+            onPageChange: this.handlePageChange.bind(this),
+            onSizePerPageChange: this.handleSizePerPageChange.bind(this)
+        })
         return (
             <div>
                 <div className="row">
@@ -203,10 +249,11 @@ class BiochemistryTable extends Component {
                     headerClasses="table-header"
                     data={this.state.tableData}
                     columns={this.props.columns}
-                    pagination={paginationFactory()}
+                    pagination={pagination}
                     expandRow={this.props.expandRow}
                     noDataIndication={this.renderNoData()}
                     handleTableChange={this.handleTableChange}
+                    totalSize={this.state.totalCount}
                 />
             </div>
         );
@@ -220,7 +267,8 @@ BiochemistryTable.propTypes = {
     // githubURL: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     view: PropTypes.string,
-    storedQuery: PropTypes.string
+    storedQuery: PropTypes.string,
+    hasMore: PropTypes.bool
 };
 
 export default BiochemistryTable;

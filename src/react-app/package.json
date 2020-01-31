@@ -20,7 +20,8 @@
         "@kbase/ui-lib": "0.2.1-alpha.3",
         "@kbase/ui-components": "0.2.1-alpha.14",
         "redux": "4.0.5",
-        "react-redux": "7.1.3"
+        "react-redux": "7.1.3",
+        "node-forge": "0.9.1"
     },
     "directories": {
         "doc": "doc"

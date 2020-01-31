@@ -16,13 +16,13 @@ export default class ErrorBoundary extends React.Component {
     }
 
     componentDidCatch(error, errorInfo) {
-        console.error('ERROR', error, errorInfo);
+        console.error('Error Caught by ErrorBoundary', error, errorInfo);
     }
 
     render() {
         if (this.state.errorMessage) {
             const message = this.state.errorMessage;
-            return <div class="alert-error" message={message} />
+            return <div className="alert-error">{message}</div>;
         }
         return this.props.children;
     }

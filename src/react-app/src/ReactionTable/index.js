@@ -15,8 +15,6 @@ function mapStateToProps(state, props) {
         }
     } = state;
 
-    console.log('STATE', state);
-
     if (!userAuthorization) {
         throw new Error('Not authorized');
     }
