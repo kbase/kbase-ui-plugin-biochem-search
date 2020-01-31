@@ -11,5 +11,6 @@ export function compoundImagePath(cid) {
     const md = forge.md.sha256.create();
     const hashed = md.update(imageFileName).digest().toHex();
     const prefix = hashed.substr(0, 2)
-    return `images/modelseed/${prefix}/${imageFileName}`;
+    // return `images/modelseed/${prefix}/${imageFileName}`;
+    return `https://raw.githubusercontent.com/eapearson/kbase-ui-plugin-biochem-search/master/resources/modelseed/${prefix}/${imageFileName}`
 }

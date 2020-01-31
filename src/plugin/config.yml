@@ -15,8 +15,11 @@ install:
   routes:
     - path: [biochem-search]
       queryParams: { q: true }
-      widget: kb_plugin_biochem-search_search 
+      widget: kb_iframe_loader
       authorization: true
+      params:
+        view: main
+        plugin: biochem-search
   menu:
     - name: biochem-search
       definition:
