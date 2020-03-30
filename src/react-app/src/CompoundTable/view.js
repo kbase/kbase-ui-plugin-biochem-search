@@ -29,7 +29,7 @@ class CompoundTable extends Component {
 
         this.columns = [
             {
-                dataField: '_key',
+                dataField: 'id',
                 text: 'ID',
                 sort: true
             },
