@@ -103,13 +103,7 @@ class BiochemistryTable extends Component {
                     return response.json();
                 })
                 .then((response) => {
-                    const data = response.results.map((datum) => {
-                        if (!datum.id) {
-                            datum.id = datum._id;
-                        }
-                        return datum;
-                    });
-
+                    const data = response.results;
                     const hasMore = data.length < response.stats.scannedIndex;
                     let message = `${data.length.toLocaleString()} items found`;
                     if (hasMore) {
