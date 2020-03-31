@@ -3,10 +3,12 @@ import BiochemistryTable from '../BiochemistryTable';
 import { compoundImagePath } from '../common';
 
 class CompoundTable extends Component {
-    static imgFormatter(cell) {
+    static imgFormatter(cell, row) {
+        // console.log('img formatter', cell, row);
+        const id = row['id'];
         return (
             <img
-                src={compoundImagePath(cell)}
+                src={compoundImagePath(id)}
                 alt=""
                 style={{ height: '100px' }}
                 onError={(i) => (i.target.src = '')}
@@ -34,7 +36,10 @@ class CompoundTable extends Component {
                 sort: true
             },
             {
-                dataField: 'id',
+                // note this is a dummy field - image uses the id, but can't use
+                // dataField: 'id' here since the value is used for the id of the header cell,
+                // which is not overridden by the attr option.
+                dataField: 'image',
                 text: 'Image',
                 formatter: CompoundTable.imgFormatter
             },

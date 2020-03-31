@@ -103,13 +103,18 @@ class BiochemistryTable extends Component {
                     return response.json();
                 })
                 .then((response) => {
-                    const data = response.results;
+                    const data = response.results.map((datum) => {
+                        if (!datum.id) {
+                            datum.id = datum._key;
+                        }
+                        return datum;
+                    });
                     const hasMore = data.length < response.stats.scannedIndex;
                     let message = `${data.length.toLocaleString()} items found`;
                     if (hasMore) {
                         message += '- more!'
                     }
-                    // console.log('response', message, hasMore, response, data.length, response.stats.scannedIndex);
+
                     this.setState({
                         tableData: data,
                         // totalCount: response.total,
@@ -186,7 +191,7 @@ class BiochemistryTable extends Component {
 
                 let message = `${this.state.tableData.length.toLocaleString()} items found`;
                 if (this.state.hasMore) {
-                    let more = this.state.totalCount - this.state.tableData.length;
+                    const more = this.state.totalCount - this.state.tableData.length;
                     message += ` - ${more.toLocaleString()} more not shown`;
                 }
                 return message;
