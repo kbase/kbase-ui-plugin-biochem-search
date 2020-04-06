@@ -14,9 +14,9 @@ install:
       type: es6
   routes:
     - path: [biochem-search]
-      queryParams: { q: true }
+      queryParams: {q: true}
       widget: kb_iframe_loader
-      authorization: true
+      authorization: false
       params:
         view: main
         plugin: biochem-search
