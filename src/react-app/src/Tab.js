@@ -17,7 +17,10 @@ export default class Tab extends Component {
         }
 
         return (
-            <li className={className} onClick={this.onClick.bind(this)}>
+            <li className={className}
+                data-k-b-testhook-component="tab" 
+                data-k-b-testhook-tab={label}
+                onClick={this.onClick.bind(this)}>
                 {label}
             </li>
         );

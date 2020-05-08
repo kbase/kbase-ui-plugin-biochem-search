@@ -25,7 +25,7 @@ export default class Tabs extends Component {
 
     renderTabs() {
         return (
-            <div className="tabs">
+            <div className="tabs" data-k-b-testhook-component="tabs">
                 <ol className="tab-list">
                     {React.Children.map(this.props.children, (child) => {
                         const { label } = child.props;
