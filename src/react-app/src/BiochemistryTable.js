@@ -143,7 +143,7 @@ class BiochemistryTable extends Component {
         const content = () => {
             switch (this.state.searchState) {
                 case SEARCH_STATE_NONE:
-                    return <span>
+                    return <span data-k-b-testhook-element="render-no-data">
                         Please search for {this.props.title} above
                         </span>
                 case SEARCH_STATE_SEARCHING:
@@ -222,7 +222,7 @@ class BiochemistryTable extends Component {
             onSizePerPageChange: this.handleSizePerPageChange.bind(this)
         })
         return (
-            <div>
+            <div data-k-b-testhook-component="biochemistry-table">
                 <div className="row">
                     <div className="col mb-3 input-group form-inline justify-content-end">
                         <input
@@ -233,7 +233,8 @@ class BiochemistryTable extends Component {
                             onChange={this.handleChange.bind(this)}
                             onKeyPress={this.handleKeyPress.bind(this)}
                         />
-                        <div className="input-group-append" onClick={this.handleSearchButtonClick.bind(this)}>
+                        <div className="input-group-append" 
+                            onClick={this.handleSearchButtonClick.bind(this)}>
                             <button className="input-group-text">
                                 <i className="fa fa-search" />
                             </button>
