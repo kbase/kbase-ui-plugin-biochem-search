@@ -1,21 +1,15 @@
 ## Plugin Configuration
 ---
 package:
-  author: KBase Developer
   name: biochem-search
-  description:
+  description: BioChemistry Search
 source:
   styles:
     - file: styles.css
 install:
-  widgets:
-    - id: kb_plugin_biochem-search_search
-      module: panel
-      type: es6
   routes:
     - path: [biochem-search]
       queryParams: {q: true}
-      widget: kb_iframe_loader
       authorization: false
       params:
         view: main
