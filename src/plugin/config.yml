@@ -8,12 +8,9 @@ source:
     - file: styles.css
 install:
   routes:
-    - path: [biochem-search]
-      queryParams: {q: true}
+    - path: biochem-search?:-q
       authorization: false
-      params:
-        view: main
-        plugin: biochem-search
+      view: main
   menu:
     - name: biochem-search
       definition:
