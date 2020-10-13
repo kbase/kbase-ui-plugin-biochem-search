@@ -3,17 +3,15 @@
 package:
   name: biochem-search
   description: BioChemistry Search
-source:
-  styles:
-    - file: styles.css
-install:
-  routes:
-    - path: biochem-search?:-q
-      authorization: false
-      view: main
+services:
+  route:
+    routes:
+      - path: "{{plugin}}?:-q"
+        authorization: false
+        view: main
   menu:
-    - name: biochem-search
-      definition:
-        path: [biochem-search]
+    items:
+      - name: biochem-search
+        path: "{{plugin}}"
         label: Biochem Search
         icon: search
