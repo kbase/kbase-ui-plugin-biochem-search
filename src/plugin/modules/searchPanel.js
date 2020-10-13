@@ -1,4 +1,12 @@
-define(['preact', 'kb_lib/html', './components/search'], function (Preact, html, SearchComponent) {
+define([
+    'preact', 
+    'kb_lib/html', 
+    './components/search'
+], function (
+    Preact, 
+    html, 
+    SearchComponent
+) {
     /* strict mode
      * We always set strict mode with the following magic javascript
      * incantation.
